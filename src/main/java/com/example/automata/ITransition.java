@@ -13,4 +13,6 @@ public interface ITransition {
     public void addInto(TransistionBuilder t);
 
     public void printDot(StringBuilder sbr);
+
+    public void setInitialFinalStates(State initial, Set<State> finalState);
 }

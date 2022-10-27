@@ -10,6 +10,9 @@ public class Transistion implements ITransition {
 
     Map<Pair<State, Character>, Set<State>> table;
 
+    State initial;
+    Set<State> finalStates;
+
     public Transistion(Map<Pair<State, Character>, Set<State>> table) {
         this.table = table;
     }
@@ -54,5 +57,11 @@ public class Transistion implements ITransition {
                 sbr.append(src.uid + " -> " + dest.uid + " [label=\"" + label + "\"]\n");
             }
         }
+    }
+
+    @Override
+    public void setInitialFinalStates(State initial, Set<State> finalState) {
+        this.initial = initial;
+        this.finalStates = finalState;
     }
 }

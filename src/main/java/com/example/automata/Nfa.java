@@ -16,6 +16,7 @@ public class Nfa {
         this.transition = transition;
         this.initialState = initialState;
         this.finalStates = finalStates;
+        transition.setInitialFinalStates(initialState, finalStates);
     }
 
     public boolean run(String input) {
