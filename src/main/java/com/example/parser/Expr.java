@@ -1,5 +1,7 @@
 package com.example.parser;
 
+import com.example.automata.Nfa;
+
 enum ExprType {
     OR,
     AND,
@@ -13,6 +15,8 @@ public abstract class Expr {
     Expr(ExprType t) {
         type = t;
     }
+
+    public abstract Nfa toNfa();
 }
 
 class EOr extends Expr {
@@ -26,6 +30,11 @@ class EOr extends Expr {
 
     public String toString() {
         return left.toString() + "|" + right.toString();
+    }
+
+    @Override
+    public Nfa toNfa() {
+        return Nfa.or(left.toNfa(), right.toNfa());
     }
 }
 
@@ -41,6 +50,11 @@ class EAnd extends Expr {
     public String toString() {
         return left.toString() + right.toString();
     }
+
+    @Override
+    public Nfa toNfa() {
+        return Nfa.and(left.toNfa(), right.toNfa());
+    }
 }
 
 class EStar extends Expr {
@@ -54,6 +68,11 @@ class EStar extends Expr {
     public String toString() {
         return "(" + expr + ")*";
     }
+
+    @Override
+    public Nfa toNfa() {
+        return Nfa.star(expr.toNfa());
+    }
 }
 
 class ESymbol extends Expr {
@@ -66,5 +85,10 @@ class ESymbol extends Expr {
 
     public String toString() {
         return value.toString();
+    }
+
+    @Override
+    public Nfa toNfa() {
+        return Nfa.fromCharacter(value);
     }
 }

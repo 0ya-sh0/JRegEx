@@ -16,13 +16,6 @@ public class EpsilonTransistion extends Transistion {
     }
 
     @Override
-    public Set<State> nextStates(State currentState, Character symbol) {
-        Set<State> currentStates = processor.process(currentState);
-        currentStates = super.nextStates(currentStates, symbol);
-        return processor.process(currentStates);
-    }
-
-    @Override
     public Set<State> nextStates(Set<State> currentStates, Character symbol) {
         currentStates = processor.process(currentStates);
         currentStates = super.nextStates(currentStates, symbol);
@@ -33,6 +26,11 @@ public class EpsilonTransistion extends Transistion {
     public void addInto(TransistionBuilder t) {
         super.addInto(t);
         t.addEpsilon(etable);
+    }
+
+    @Override
+    public Set<State> currentStates(Set<State> currentState) {
+        return processor.process(currentState);
     }
 
 }

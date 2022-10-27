@@ -1,8 +1,5 @@
 package com.example;
 
-import com.example.parser.Expr;
-import com.example.parser.RegexParser;
-
 /**
  * Hello world!
  *
@@ -10,9 +7,16 @@ import com.example.parser.RegexParser;
 public class App {
     public static void main(String[] args) {
 
-        String input = "(ab|c)*z";
-        RegexParser p = new RegexParser(input);
-        Expr e = p.parse();
-        System.out.println(e);
+        String input = "abc*|xy";
+        JRegEx regEx = new JRegEx(input);
+
+        System.out.println(regEx.match("abc"));
+        System.out.println(regEx.match("abccc"));
+        System.out.println(regEx.match("xy"));
+
+        System.out.println(regEx.match("a"));
+        System.out.println(regEx.match("x"));
+        System.out.println(regEx.match("abcxy"));
+
     }
 }

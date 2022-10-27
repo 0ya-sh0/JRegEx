@@ -37,7 +37,7 @@ public class EpsilonTransistionProcessor {
         visited.add(state);
         Set<State> nextStates = getEpsilonAddition(state);
         if (!nextStates.isEmpty())
-            newAdditions = true;
+            newAdditions = !result.containsAll(nextStates);
         result.addAll(nextStates);
         for (State State : nextStates) {
             if (!visited.contains(State))

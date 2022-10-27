@@ -1,14 +1,15 @@
 package com.example.automata;
 
 public class State {
-    Integer uid;
-    static Integer count = 0;
+    int uid;
+    static int count = 0;
 
     State() {
-        this.uid = count++;
+        this.uid = count;
+        count++;
     }
 
-    State(Integer uid) {
+    State(int uid) {
         this.uid = uid;
     }
 }

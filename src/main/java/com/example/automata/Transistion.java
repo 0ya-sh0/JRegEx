@@ -38,4 +38,9 @@ public class Transistion implements ITransition {
     public void addInto(TransistionBuilder t) {
         t.add(table);
     }
+
+    @Override
+    public Set<State> currentStates(Set<State> currentState) {
+        return currentState;
+    }
 }

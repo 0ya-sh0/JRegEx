@@ -21,11 +21,10 @@ public class Nfa {
     public boolean run(String input) {
         currentStates = new HashSet<>();
         currentStates.add(initialState);
-
         for (Character ch : input.toCharArray()) {
             currentStates = transition.nextStates(currentStates, ch);
         }
-
+        currentStates = transition.currentStates(currentStates);
         Set<State> intersection = new HashSet<>(currentStates);
         intersection.retainAll(finalStates);
 
@@ -78,6 +77,15 @@ public class Nfa {
         for (State finState : value.finalStates) {
             builder.addEpsilon(finState, Arrays.asList(value.initialState, nFinalState));
         }
+        ITransition nTransistion = builder.build();
+        return new Nfa(nTransistion, nInitialState, new HashSet<>(Arrays.asList(nFinalState)));
+    }
+
+    public static Nfa fromCharacter(Character ch) {
+        State nInitialState = new State();
+        State nFinalState = new State();
+        TransistionBuilder builder = new TransistionBuilder();
+        builder.add(nInitialState, ch, Arrays.asList(nFinalState));
         ITransition nTransistion = builder.build();
         return new Nfa(nTransistion, nInitialState, new HashSet<>(Arrays.asList(nFinalState)));
     }
