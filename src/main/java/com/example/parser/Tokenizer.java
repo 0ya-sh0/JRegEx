@@ -23,6 +23,11 @@ class Token {
     public String toString() {
         return type.toString() + "<" + value + ">";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.toString().equals(obj.toString());
+    }
 }
 
 class Tokenizer {
