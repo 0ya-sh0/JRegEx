@@ -43,4 +43,16 @@ public class Transistion implements ITransition {
     public Set<State> currentStates(Set<State> currentState) {
         return currentState;
     }
+
+    @Override
+    public void printDot(StringBuilder sbr) {
+
+        for (Pair<State, Character> key : table.keySet()) {
+            State src = key.getValue0();
+            Character label = key.getValue1();
+            for (State dest : table.get(key)) {
+                sbr.append(src.uid + " -> " + dest.uid + " [label=\"" + label + "\"]\n");
+            }
+        }
+    }
 }

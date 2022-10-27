@@ -33,4 +33,14 @@ public class EpsilonTransistion extends Transistion {
         return processor.process(currentState);
     }
 
+    @Override
+    public void printDot(StringBuilder sbr) {
+        super.printDot(sbr);
+        for (State src : etable.keySet()) {
+            for (State dest : etable.get(src)) {
+                sbr.append(src.uid + " -> " + dest.uid + " [style=dashed, label=\"ϵ\"]\n");
+            }
+        }
+    }
+
 }

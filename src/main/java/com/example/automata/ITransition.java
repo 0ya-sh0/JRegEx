@@ -11,4 +11,6 @@ public interface ITransition {
     public Set<State> nextStates(Set<State> currentStates, Character symbol);
 
     public void addInto(TransistionBuilder t);
+
+    public void printDot(StringBuilder sbr);
 }

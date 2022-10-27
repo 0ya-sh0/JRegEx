@@ -89,4 +89,18 @@ public class Nfa {
         ITransition nTransistion = builder.build();
         return new Nfa(nTransistion, nInitialState, new HashSet<>(Arrays.asList(nFinalState)));
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sbr = new StringBuilder();
+        sbr.append("digraph G {\n");
+        sbr.append("rankdir=LR;\n");
+        sbr.append(initialState.uid + " [shape=diamond]\n");
+        for (State fState : finalStates) {
+            sbr.append(fState.uid + " [shape=box]\n");
+        }
+        transition.printDot(sbr);
+        sbr.append("}\n");
+        return sbr.toString();
+    }
 }

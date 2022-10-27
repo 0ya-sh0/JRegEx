@@ -1,5 +1,9 @@
 package com.example;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import com.example.automata.Nfa;
 import com.example.parser.Expr;
 import com.example.parser.RegexParser;
@@ -18,5 +22,17 @@ public class JRegEx {
 
     public boolean match(String input) {
         return nfa.run(input);
+    }
+
+    public void wrtieToFile() {
+        File f = new File(regex + ".DOT");
+        try {
+            FileWriter fw = new FileWriter(f);
+            fw.write(nfa.toString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
