@@ -99,8 +99,19 @@ public class JRegExTest {
 
     @Test
     public void emailLike() {
-        JRegEx regEx = new JRegEx("(abc|(abc)*)@(xyz|(xyz)*).(123|(123)*)");
+        JRegEx regEx = new JRegEx("(abc(abc)*)@(xyz(xyz)*).(123(123)*)");
         assertTrue(regEx.match("abc@xyz.123"));
         assertTrue(regEx.match("abcabc@xyzxyz.123123123"));
+
+        assertFalse(regEx.match("abcab@xyzxyz.123123123"));
+        assertFalse(regEx.match("abcabc@xyxyz.123123123"));
+        assertFalse(regEx.match("abcabc@xyzxyz.12313123"));
+        assertFalse(regEx.match("abcxyz.123"));
+        assertFalse(regEx.match("abc@xyz123"));
+        assertFalse(regEx.match("@."));
+        assertFalse(regEx.match("abc@xyz."));
+        assertFalse(regEx.match("abc@.123"));
+        assertFalse(regEx.match("@xyz.123"));
+
     }
 }
