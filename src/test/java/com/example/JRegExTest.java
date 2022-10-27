@@ -114,4 +114,83 @@ public class JRegExTest {
         assertFalse(regEx.match("@xyz.123"));
 
     }
+
+    @Test
+    public void test8() {
+        JRegEx regEx = new JRegEx("1(0|1)*0");
+
+        assertTrue(regEx.match("10"));
+        assertTrue(regEx.match("100"));
+        assertTrue(regEx.match("110"));
+        assertTrue(regEx.match("1100"));
+        assertTrue(regEx.match("1010"));
+        assertTrue(regEx.match("101001110"));
+
+        assertFalse(regEx.match(""));
+        assertFalse(regEx.match("0"));
+        assertFalse(regEx.match("1"));
+        assertFalse(regEx.match("00"));
+        assertFalse(regEx.match("11"));
+
+    }
+
+    @Test
+    public void test9() {
+        JRegEx regEx = new JRegEx("10|(0|11)0*1");
+
+        assertTrue(regEx.match("10"));
+        assertTrue(regEx.match("01"));
+        assertTrue(regEx.match("111"));
+        assertTrue(regEx.match("001"));
+        assertTrue(regEx.match("0001"));
+        assertTrue(regEx.match("1101"));
+        assertTrue(regEx.match("11001"));
+        assertTrue(regEx.match("110001"));
+
+        assertFalse(regEx.match(""));
+        assertFalse(regEx.match("0"));
+        assertFalse(regEx.match("1"));
+        assertFalse(regEx.match("00"));
+        assertFalse(regEx.match("11"));
+
+    }
+
+    @Test
+    public void phoneNumber() {
+        // 10 digit phone number with country code
+        JRegEx regEx = new JRegEx(
+                "(+91|0)(9|8|7)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)");
+
+        assertTrue(regEx.match("+919876543210"));
+        assertTrue(regEx.match("09876543210"));
+
+        assertFalse(regEx.match("06876543210"));
+        assertFalse(regEx.match("+916876543210"));
+        assertFalse(regEx.match("+91987654"));
+        assertFalse(regEx.match("+9198765432100"));
+        assertFalse(regEx.match("+919876abcd"));
+
+    }
+
+    @Test
+    public void name() {
+        JRegEx regEx = new JRegEx("((Mr|Ms|Mrs|Dr) (A|B|C)(x|y|z)*)|(A|B|C)(x|y|z)*)");
+        assertTrue(regEx.match("A"));
+        assertTrue(regEx.match("B"));
+        assertTrue(regEx.match("B"));
+        assertTrue(regEx.match("Ax"));
+        assertTrue(regEx.match("Axyz"));
+        assertTrue(regEx.match("Cyyy"));
+        assertTrue(regEx.match("Mr Cyyy"));
+        assertTrue(regEx.match("Ms Cyyy"));
+        assertTrue(regEx.match("Dr Cyyy"));
+
+        assertFalse(regEx.match("xyz"));
+        assertFalse(regEx.match("1xyz"));
+        assertFalse(regEx.match("Bx1yz"));
+        assertFalse(regEx.match(" B"));
+        assertFalse(regEx.match("Mr  B"));
+        assertFalse(regEx.match("B "));
+
+    }
 }
