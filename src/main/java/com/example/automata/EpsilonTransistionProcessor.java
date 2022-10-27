@@ -26,7 +26,7 @@ public class EpsilonTransistionProcessor {
         do {
             newAdditions = false;
             for (State State : state) {
-                newAdditions = newAdditions || _fromState(State);
+                newAdditions = _fromState(State) || newAdditions;
             }
         } while (newAdditions);
         return result;
@@ -41,7 +41,7 @@ public class EpsilonTransistionProcessor {
         result.addAll(nextStates);
         for (State State : nextStates) {
             if (!visited.contains(State))
-                newAdditions = newAdditions || _fromState(State);
+                newAdditions = _fromState(State) || newAdditions;
         }
         return newAdditions;
     }

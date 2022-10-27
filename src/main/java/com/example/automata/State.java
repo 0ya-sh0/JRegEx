@@ -12,4 +12,9 @@ public class State {
     State(int uid) {
         this.uid = uid;
     }
+
+    @Override
+    public String toString() {
+        return "" + uid;
+    }
 }
