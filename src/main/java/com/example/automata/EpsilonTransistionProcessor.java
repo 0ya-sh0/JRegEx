@@ -6,47 +6,47 @@ import java.util.Map;
 import java.util.Set;
 
 public class EpsilonTransistionProcessor {
-    Set<Integer> visited;
-    Set<Integer> result;
-    Map<Integer, Set<Integer>> etable;
+    Set<State> visited;
+    Set<State> result;
+    Map<State, Set<State>> etable;
 
-    public EpsilonTransistionProcessor(Map<Integer, Set<Integer>> etable) {
+    public EpsilonTransistionProcessor(Map<State, Set<State>> etable) {
         this.etable = etable;
     }
 
-    public Set<Integer> process(Integer state) {
+    public Set<State> process(State state) {
         return process(new HashSet<>(Arrays.asList(state)));
     }
 
-    public Set<Integer> process(Set<Integer> state) {
+    public Set<State> process(Set<State> state) {
         visited = new HashSet<>();
         result = new HashSet<>();
         result.addAll(state);
         boolean newAdditions;
         do {
             newAdditions = false;
-            for (Integer integer : state) {
-                newAdditions = newAdditions || _fromState(integer);
+            for (State State : state) {
+                newAdditions = newAdditions || _fromState(State);
             }
         } while (newAdditions);
         return result;
     }
 
-    private boolean _fromState(Integer state) {
+    private boolean _fromState(State state) {
         boolean newAdditions = false;
         visited.add(state);
-        Set<Integer> nextStates = getEpsilonAddition(state);
+        Set<State> nextStates = getEpsilonAddition(state);
         if (!nextStates.isEmpty())
             newAdditions = true;
         result.addAll(nextStates);
-        for (Integer integer : nextStates) {
-            if (!visited.contains(integer))
-                newAdditions = newAdditions || _fromState(integer);
+        for (State State : nextStates) {
+            if (!visited.contains(State))
+                newAdditions = newAdditions || _fromState(State);
         }
         return newAdditions;
     }
 
-    public Set<Integer> getEpsilonAddition(Integer input) {
+    public Set<State> getEpsilonAddition(State input) {
         if (!etable.containsKey(input))
             return new HashSet<>();
         return etable.get(input);

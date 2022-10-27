@@ -8,16 +8,16 @@ import org.javatuples.Pair;
 
 public class Transistion implements ITransition {
 
-    Map<Pair<Integer, Character>, Set<Integer>> table;
+    Map<Pair<State, Character>, Set<State>> table;
 
-    public Transistion(Map<Pair<Integer, Character>, Set<Integer>> table) {
+    public Transistion(Map<Pair<State, Character>, Set<State>> table) {
         this.table = table;
     }
 
     @Override
-    public Set<Integer> nextStates(Integer currentState, Character symbol) {
+    public Set<State> nextStates(State currentState, Character symbol) {
 
-        Pair<Integer, Character> key = new Pair<Integer, Character>(currentState, symbol);
+        Pair<State, Character> key = new Pair<State, Character>(currentState, symbol);
 
         if (!table.containsKey(key)) {
             return new HashSet<>();
@@ -26,11 +26,16 @@ public class Transistion implements ITransition {
     }
 
     @Override
-    public Set<Integer> nextStates(Set<Integer> currentStates, Character symbol) {
-        Set<Integer> result = new HashSet<>();
-        for (Integer integer : currentStates) {
-            result.addAll(nextStates(integer, symbol));
+    public Set<State> nextStates(Set<State> currentStates, Character symbol) {
+        Set<State> result = new HashSet<>();
+        for (State State : currentStates) {
+            result.addAll(nextStates(State, symbol));
         }
         return result;
+    }
+
+    @Override
+    public void addInto(TransistionBuilder t) {
+        t.add(table);
     }
 }

@@ -9,18 +9,38 @@ import java.util.Set;
 import org.javatuples.Pair;
 
 public class TransistionBuilder {
-    Map<Pair<Integer, Character>, Set<Integer>> table = new HashMap<>();
-    Map<Integer, Set<Integer>> etable = new HashMap<>();
+    Map<Pair<State, Character>, Set<State>> table = new HashMap<>();
+    Map<State, Set<State>> etable = new HashMap<>();
     boolean isEpsilon = false;
 
-    public TransistionBuilder add(Integer state, Character symbol, Collection<Integer> states) {
-        table.put(new Pair<Integer, Character>(state, symbol), new HashSet<>(states));
+    public TransistionBuilder add(State state, Character symbol, Collection<State> states) {
+        table.put(new Pair<State, Character>(state, symbol), new HashSet<>(states));
         return this;
     }
 
-    public TransistionBuilder addEpsilon(Integer state, Collection<Integer> states) {
+    public TransistionBuilder add(Map<Pair<State, Character>, Set<State>> table) {
+        this.table.putAll(table);
+        return this;
+    }
+
+    public TransistionBuilder addEpsilon(State state, Collection<State> states) {
         isEpsilon = true;
-        etable.put(state, new HashSet<>(states));
+        if (!etable.containsKey(state)) {
+            etable.put(state, new HashSet<>(states));
+            return this;
+        }
+        etable.get(state).addAll(states);
+        return this;
+    }
+
+    public TransistionBuilder addEpsilon(Map<State, Set<State>> etable) {
+        isEpsilon = true;
+        this.etable.putAll(etable);
+        return this;
+    }
+
+    public TransistionBuilder addTransistion(ITransition t) {
+        t.addInto(this);
         return this;
     }
 
