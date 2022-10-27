@@ -5,11 +5,13 @@ Java Regex Engine from scratch
 ```Java
 JRegEx regEx = new JRegEx("abc*|xy");
 
-System.out.println(regEx.match("abc"));
-System.out.println(regEx.match("abccc"));
-System.out.println(regEx.match("xy"));
+//true
+regEx.match("abc");
+regEx.match("abccc");
+regEx.match("xy");
 
-System.out.println(regEx.match("a"));
-System.out.println(regEx.match("x"));
-System.out.println(regEx.match("abcxy"));
+//false
+regEx.match("a");
+regEx.match("x");
+regEx.match("abcxy");
 ```
