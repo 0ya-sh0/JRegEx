@@ -39,12 +39,12 @@ public class TransistionBuilder {
         return this;
     }
 
-    public TransistionBuilder addTransistion(ITransition t) {
+    public TransistionBuilder addTransistion(Transistion t) {
         t.addInto(this);
         return this;
     }
 
-    public ITransition build() {
+    public Transistion build() {
         if (isEpsilon)
             return new EpsilonTransistion(table, etable);
         return new Transistion(table);

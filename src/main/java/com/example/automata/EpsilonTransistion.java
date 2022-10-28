@@ -18,8 +18,8 @@ public class EpsilonTransistion extends Transistion {
     }
 
     @Override
-    public void setInitialFinalStates(State initial, Set<State> finalState) {
-        super.setInitialFinalStates(initial, finalState);
+    public void setInitiaAndlFinalStates(State initial, Set<State> finalState) {
+        super.setInitiaAndlFinalStates(initial, finalState);
         removeExtraStates1();
         removeExtraStates2();
         removeExtraStates3();

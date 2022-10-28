@@ -6,10 +6,9 @@ import java.util.Set;
 
 import org.javatuples.Pair;
 
-public class Transistion implements ITransition {
+public class Transistion {
 
     Map<Pair<State, Character>, Set<State>> table;
-
     State initial;
     Set<State> finalStates;
 
@@ -17,7 +16,6 @@ public class Transistion implements ITransition {
         this.table = table;
     }
 
-    @Override
     public Set<State> nextStates(State currentState, Character symbol) {
 
         Pair<State, Character> key = new Pair<State, Character>(currentState, symbol);
@@ -28,7 +26,6 @@ public class Transistion implements ITransition {
         return table.get(key);
     }
 
-    @Override
     public Set<State> nextStates(Set<State> currentStates, Character symbol) {
         Set<State> result = new HashSet<>();
         for (State State : currentStates) {
@@ -37,19 +34,15 @@ public class Transistion implements ITransition {
         return result;
     }
 
-    @Override
     public void addInto(TransistionBuilder t) {
         t.add(table);
     }
 
-    @Override
     public Set<State> currentStates(Set<State> currentState) {
         return currentState;
     }
 
-    @Override
     public void printDot(StringBuilder sbr) {
-
         for (Pair<State, Character> key : table.keySet()) {
             State src = key.getValue0();
             Character label = key.getValue1();
@@ -59,8 +52,7 @@ public class Transistion implements ITransition {
         }
     }
 
-    @Override
-    public void setInitialFinalStates(State initial, Set<State> finalState) {
+    public void setInitiaAndlFinalStates(State initial, Set<State> finalState) {
         this.initial = initial;
         this.finalStates = finalState;
     }

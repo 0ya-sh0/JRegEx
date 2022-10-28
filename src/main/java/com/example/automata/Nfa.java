@@ -9,9 +9,9 @@ public class Nfa {
     final State initialState;
     Set<State> finalStates;
     Set<State> currentStates;
-    ITransition transition;
+    Transistion transition;
 
-    public Nfa(ITransition transition, State initialState,
+    public Nfa(Transistion transition, State initialState,
             Set<State> finalStates) {
         this.transition = transition;
         this.initialState = initialState;
@@ -19,7 +19,7 @@ public class Nfa {
     }
 
     public void removeExtraStates() {
-        transition.setInitialFinalStates(initialState, finalStates);
+        transition.setInitiaAndlFinalStates(initialState, finalStates);
     }
 
     public boolean run(String input) {
@@ -48,7 +48,7 @@ public class Nfa {
         for (State finState : right.finalStates) {
             builder.addEpsilon(finState, Arrays.asList(nFinalState));
         }
-        ITransition nTransistion = builder.build();
+        Transistion nTransistion = builder.build();
         return new Nfa(nTransistion, nInitialState, new HashSet<>(Arrays.asList(nFinalState)));
     }
 
@@ -66,7 +66,7 @@ public class Nfa {
         for (State finState : right.finalStates) {
             builder.addEpsilon(finState, Arrays.asList(nFinalState));
         }
-        ITransition nTransistion = builder.build();
+        Transistion nTransistion = builder.build();
         return new Nfa(nTransistion, nInitialState, new HashSet<>(Arrays.asList(nFinalState)));
     }
 
@@ -81,7 +81,7 @@ public class Nfa {
         for (State finState : value.finalStates) {
             builder.addEpsilon(finState, Arrays.asList(value.initialState, nFinalState));
         }
-        ITransition nTransistion = builder.build();
+        Transistion nTransistion = builder.build();
         return new Nfa(nTransistion, nInitialState, new HashSet<>(Arrays.asList(nFinalState)));
     }
 
@@ -90,7 +90,7 @@ public class Nfa {
         State nFinalState = new State();
         TransistionBuilder builder = new TransistionBuilder();
         builder.add(nInitialState, ch, Arrays.asList(nFinalState));
-        ITransition nTransistion = builder.build();
+        Transistion nTransistion = builder.build();
         return new Nfa(nTransistion, nInitialState, new HashSet<>(Arrays.asList(nFinalState)));
     }
 
