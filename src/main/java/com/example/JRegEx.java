@@ -5,19 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import com.example.automata.Nfa;
-import com.example.parser.Expr;
 import com.example.parser.RegexParser;
 
 public class JRegEx {
     String regex;
-    Expr expr;
     Nfa nfa;
 
     JRegEx(String input) {
         regex = input;
-        RegexParser p = new RegexParser(input);
-        expr = p.parse();
-        nfa = expr.toNfa();
+        nfa = new RegexParser(input).parse().toNfa();
         nfa.removeExtraStates();
     }
 
@@ -34,6 +30,5 @@ public class JRegEx {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
