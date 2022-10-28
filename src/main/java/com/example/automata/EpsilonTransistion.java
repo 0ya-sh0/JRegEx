@@ -198,7 +198,7 @@ public class EpsilonTransistion extends Transistion {
     public Set<State> nextStates(Set<State> currentStates, Character symbol) {
         currentStates = processor.process(currentStates);
         currentStates = super.nextStates(currentStates, symbol);
-        return processor.process(currentStates);
+        return currentStates;
     }
 
     @Override
