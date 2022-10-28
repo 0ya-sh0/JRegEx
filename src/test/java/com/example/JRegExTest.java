@@ -159,18 +159,50 @@ public class JRegExTest {
     public void phoneNumber() {
         // 10 digit phone number with country code
         JRegEx regEx = new JRegEx(
-                "(+91|0)(9|8|7)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)");
+            "(+91|0)(9|8|7)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)");
+            
+            assertTrue(regEx.match("+919876543210"));
+            assertTrue(regEx.match("09876543210"));
 
-        assertTrue(regEx.match("+919876543210"));
-        assertTrue(regEx.match("09876543210"));
-
-        assertFalse(regEx.match("06876543210"));
-        assertFalse(regEx.match("+916876543210"));
-        assertFalse(regEx.match("+91987654"));
-        assertFalse(regEx.match("+9198765432100"));
-        assertFalse(regEx.match("+919876abcd"));
+            assertFalse(regEx.match("06876543210"));
+            assertFalse(regEx.match("+916876543210"));
+            assertFalse(regEx.match("+91987654"));
+            assertFalse(regEx.match("+9198765432100"));
+            assertFalse(regEx.match("+919876abcd"));
 
     }
+
+    // @Test
+    // public void phoneNumber1() {
+    //     // 10 digit phone number with country code
+    //     for (int i = 0; i < 10000; i++) {
+    //         JRegEx regEx = new JRegEx(
+    //                 "(+91|0)(9|8|7)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)");
+    //     }
+
+    // }
+    // @Test
+    // public void phoneNumber2() {
+    //     // 10 digit phone number with country code
+    //     JRegEx regEx = new JRegEx(
+    //         "(+91|0)(9|8|7)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)(9|8|7|6|5|4|3|2|1|0)");
+
+    //     for (int i = 0; i < 10000; i++) {
+
+            
+    //         assertTrue(regEx.match("+919876543210"));
+    //         assertTrue(regEx.match("09876543210"));
+
+    //         assertFalse(regEx.match("06876543210"));
+    //         assertFalse(regEx.match("+916876543210"));
+    //         assertFalse(regEx.match("+91987654"));
+    //         assertFalse(regEx.match("+9198765432100"));
+    //         assertFalse(regEx.match("+919876abcd"));
+    //     }
+
+    // }
+
+    
 
     @Test
     public void name() {

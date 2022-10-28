@@ -16,6 +16,9 @@ public class Nfa {
         this.transition = transition;
         this.initialState = initialState;
         this.finalStates = finalStates;
+    }
+
+    public void removeExtraStates() {
         transition.setInitialFinalStates(initialState, finalStates);
     }
 

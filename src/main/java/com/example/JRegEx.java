@@ -18,6 +18,7 @@ public class JRegEx {
         RegexParser p = new RegexParser(input);
         expr = p.parse();
         nfa = expr.toNfa();
+        nfa.removeExtraStates();
     }
 
     public boolean match(String input) {
